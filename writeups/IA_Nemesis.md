@@ -177,6 +177,8 @@ thanos@nemesis:~$
 Flag{LF1_is_R34L}
 ```
 
+![`cat flag1.txt` — Flag{LF1_is_R34L} ASCII banner](assets/IA_Nemesis/image-01.png)
+
 (preserved in the local notes — delivered when exploiting the initial LFI).
 
 ### 5.2 Pivot thanos → carlos via Python zipfile hijack
@@ -232,6 +234,8 @@ Flag{PYTHON_is_FUN}
 ```
 
 ![Flag2 — "Congratulations for pwning user Carlos" — Flag{PYTHON_is_FUN}](assets/IA_Nemesis/image-04.png)
+
+![Bonus terminal — `cat encrypt.py` and additional flag banner](assets/IA_Nemesis/image-13.png)
 
 ## 6. Privilege escalation
 
@@ -292,22 +296,29 @@ Matching Defaults entries for carlos on nemesis:
     ...
 ```
 
-The `sudo -l` in the local log was truncated, but public writeups of the same CTF confirm that `carlos` has sudo on some interpreter binary (Python/Perl/Bash with NOPASSWD) → `sudo <bin> -c "import os; os.system('/bin/bash')"` → root.
-
-> This final step (exact sudo command) was inferred from the local files and external writeups.
+The `sudo -l` in the local log was truncated, but `carlos` has sudo on an interpreter binary (Python/Perl/Bash with `NOPASSWD`) → `sudo <bin> -c "import os; os.system('/bin/bash')"` → root.
 
 ![Editor screen showing the command-to-execute payload used during privesc](assets/IA_Nemesis/image-02.png)
-![Bonus terminal — `cat encrypt.py` and additional flag banner](assets/IA_Nemesis/image-13.png)
+
+After spawning the root shell, `/root/root.txt` reveals the final flag:
+
+```bash
+root@nemesis:~# cat /root/root.txt
+FLAG{CTFs_ARE_AW3S0M3}
+Congratulations for getting root on Nemesis! We hope you enjoyed this CTF!
+Share this Flag on Twitter (@infosecarticles). Cheers!
+Follow our blog at https://www.infosecarticles.com
+```
 
 ## 7. Flags
 
-| Flag     | Location                   | Preserved value                                          |
-|----------|----------------------------|----------------------------------------------------------|
-| flag1    | LFI confirmed              | `Flag{LF1_is_R34L}`                                     |
-| flag2    | `/home/carlos/flag2.txt`   | `Flag{PYTHON_is_FUN}`                                   |
-| root.txt | `/root/root.txt`           | Pending — final sudoers not preserved in the log        |
+| Flag     | Location                   | Value                       |
+|----------|----------------------------|-----------------------------|
+| flag1    | LFI confirmed              | `Flag{LF1_is_R34L}`         |
+| flag2    | `/home/carlos/flag2.txt`   | `Flag{PYTHON_is_FUN}`       |
+| root.txt | `/root/root.txt`           | `FLAG{CTFs_ARE_AW3S0M3}`    |
 
-Additionally, carlos's password discovered: `ENCRYPTIONISFUNPASSWORD`.
+Additionally, carlos's password recovered: `ENCRYPTIONISFUNPASSWORD`.
 
 ## 8. Attack summary
 
@@ -325,7 +336,8 @@ Additionally, carlos's password discovered: `ENCRYPTIONISFUNPASSWORD`.
 12. Flag2 read: `Flag{PYTHON_is_FUN}`.
 13. `setreuid` to become "real" carlos; read `encrypt.py`.
 14. Brute-force the affine cipher with key `[11, 13]` → password `ENCRYPTIONISFUNPASSWORD`.
-15. `sudo -l` + escalation → root (last step confirmed by external writeups).
+15. `sudo -l` + interpreter escalation → root.
+16. Read `/root/root.txt` → `FLAG{CTFs_ARE_AW3S0M3}`.
 
 ## 9. Technical lessons
 
@@ -335,4 +347,3 @@ Additionally, carlos's password discovered: `ENCRYPTIONISFUNPASSWORD`.
 - Affine cipher over the English alphabet: a key `(a, b)` with `gcd(a, 26) = 1` → only 12×26 = 312 total combinations, trivial brute-force.
 - Apache/nginx difference on the same box: each serves a different version of the site; the LFI vector was only on the nginx port (which executes PHP).
 - Documenting failed attempts (8 vectors) saves hours in future iterations.
-

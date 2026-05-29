@@ -224,5 +224,3 @@ The "Fun with Flags" CTF doesn't focus on classic Linux escalation — the chall
 - Unsalted MD5 + small dictionary → immediate crack.
 - Password reuse across DB, FTP, SSH, and WiFi.
 - Flags embedded in DB columns (the `description` field) is a typical vector in themed CTFs.
-
-

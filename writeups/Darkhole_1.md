@@ -276,4 +276,3 @@ DarkHole{You_Are_Legend}
 - `sudo NOPASSWD` on a writable script is equivalent to `NOPASSWD` on `/bin/bash`.
 - A 777 user directory breaks sshd's `StrictModes` (no `authorized_keys` injection possible) but still allows overwriting privileged scripts.
 - Documenting failed attempts (kernel exploits, SSH keys) saves time in future iterations.
-

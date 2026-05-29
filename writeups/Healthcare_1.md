@@ -311,5 +311,3 @@ Bonus found in `/root/`: `healthcheck.c` (source code) and `sudo.rpm` (package p
 - OpenFlashChart `ofc_upload_image.php` is a classic vulnerability in older PHP apps.
 - Unsalted SHA1 hashes + dictionary → immediate cracking.
 - SUID + `system()` with a relative name is the recipe for PATH hijack (mirrored in the Darkhole and Dr4g0n b4ll boxes).
-
-

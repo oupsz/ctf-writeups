@@ -259,5 +259,3 @@ Sun_CSR_TEAM_TOMATO_JS_0232xx23
 - Anti Bots plugin (sminozzi) with `info.php` exposed via `image=` is a known vulnerability — don't trust "anti-X plugins" as a defense.
 - Kernel `4.4.0-21-generic` (Ubuntu 16.04) is a minefield: `af_packet`, eBPF, DirtyCow, etc.
 - Linpeas exploit ranking helps pick the most likely to succeed instead of trying everything.
-
-
