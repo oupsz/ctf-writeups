@@ -312,11 +312,4 @@ Bonus found in `/root/`: `healthcheck.c` (source code) and `sudo.rpm` (package p
 - Unsalted SHA1 hashes + dictionary → immediate cracking.
 - SUID + `system()` with a relative name is the recipe for PATH hijack (mirrored in the Darkhole and Dr4g0n b4ll boxes).
 
-## 10. References consulted
 
-- Healthcare: 1 ~ VulnHub (official entry)
-- Healthcare: 1 Vulnhub Walkthrough — Hacking Articles
-- Vulnhub: Healthcare 1 — ikuamike
-- Vulnhub | Healthcare: 1 — Ben Heater
-- VulnHub-Healthcare-1 — aldeid wiki
-- Healthcare Vulnhub Writeup — Hitesh Kadu
