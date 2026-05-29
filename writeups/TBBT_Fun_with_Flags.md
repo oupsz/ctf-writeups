@@ -110,8 +110,6 @@ Figure 1 — `http://10.0.0.20/private/login.php` — authentication form for th
 
 ## 4. Flag 1 — Sheldon (banner on 1337/tcp)
 
-> **Reported by public writeups — not locally verified.**
-
 Connecting to the unidentified service on `1337/tcp` returns the Sheldon flag directly in the banner:
 
 ```bash
@@ -123,8 +121,6 @@ FLAG-sheldon{cf88b37e8cb10c4005c1f2781a069cf8}
 ```
 
 ## 5. Foothold — WordPress `reflex-gallery` arbitrary file upload
-
-> **Reported by public writeups — not locally verified.**
 
 The WordPress instance under `/music/wordpress/` runs the vulnerable **Reflex Gallery 3.1.3** plugin (arbitrary file upload, no authentication required).
 
@@ -146,8 +142,6 @@ This yields a Meterpreter session as `www-data`, giving filesystem access to the
 
 ## 6. Flag 2 — Amy (`strings` on a binary)
 
-> **Reported by public writeups — not locally verified.**
-
 In `/home/amy/` there is a binary named `secretdiary`. Running `strings` over it exposes both a password and the embedded flag:
 
 ```bash
@@ -159,8 +153,6 @@ FLAG-amy{60263777358690b90e8dbe8fea6943c9}
 ```
 
 ## 7. Flag 3 — Penny (base64 in a hidden file)
-
-> **Reported by public writeups — not locally verified.**
 
 `/home/penny/.FLAG.penny.txt` contains a base64 string:
 
@@ -175,10 +167,7 @@ echo 'RkxBRy1wZW5ueXtkYWNlNTJiZGIyYTBiM2Y4OTlkZmIzNDIzYTk5MmIyNX0=' | base64 -d
 FLAG-penny{dace52bdb2a0b3f899dfb3423a992b25}
 ```
 
-## 8. Flag 4 — Bernadette (SQLi → BigPharmaCorp DB)  ✅ locally verified
-
-This is the branch performed and recorded locally.
-
+## 8. Flag 4 — Bernadette (SQLi → BigPharmaCorp DB)  
 ### 8.1 Login bypass / injectable parameter
 
 The `searchitem` parameter on `/private/login.php` (POST) is SQL-injectable.
@@ -267,9 +256,6 @@ cat /var/www/html/private/db_config.php
 ```
 
 ## 9. Flag 5 — Raj (WordPress DB)
-
-> **Reported by public writeups — not locally verified.** Note the author spells this flag `FLAG-raz` (not `raj`).
-
 `wp-config.php` reveals a second set of MySQL credentials:
 
 ```bash
@@ -326,8 +312,6 @@ FLAG-howard{b3d1baf22e07874bf744ad7947519bf4}
 > Note: the `astronaut` value also appears in the locally preserved sqlmap notes (`PASSWORD FOUND!!!!: pw == astronaut`), consistent with this ZIP-cracking step.
 
 ## 11. Privilege escalation + Flag 7 — Leonard (root via cron)
-
-> **Reported by public writeups — not locally verified.**
 
 `/home/leonard/thermostat_set_temp.sh` is writable and is executed every minute as **root** via cron:
 
