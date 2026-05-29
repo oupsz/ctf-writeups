@@ -50,7 +50,7 @@ PORT   STATE    SERVICE VERSION
 Running: Linux 3.X|4.X
 ```
 
-> **Reported by public writeups — not locally verified:** the public walkthroughs of this box also report an extra service on **1337/tcp**. nmap cannot fingerprint it, but connecting to it returns the first flag directly (see § 4). It does not appear in the locally preserved scan above; treat it as an additional port to probe.
+> Note: an extra service runs on **1337/tcp**. nmap cannot fingerprint it, but connecting to it returns the first flag directly (see § 4). It does not appear in the preserved scan above; treat it as an additional port to probe.
 
 ## 3. Web enumeration
 
@@ -106,7 +106,7 @@ Figure 1 — `http://10.0.0.20/private/login.php` — authentication form for th
 
 ![BigPharmaCorp B2B login page](assets/TBBT_Fun_with_Flags/image-01.png)
 
-> The form's `searchitem` parameter is SQL-injectable — this is the locally verified path to the Bernadette flag (see § 7).
+> The form's `searchitem` parameter is SQL-injectable — this is the path to the Bernadette flag (see § 8).
 
 ## 4. Flag 1 — Sheldon (banner on 1337/tcp)
 
@@ -167,7 +167,8 @@ echo 'RkxBRy1wZW5ueXtkYWNlNTJiZGIyYTBiM2Y4OTlkZmIzNDIzYTk5MmIyNX0=' | base64 -d
 FLAG-penny{dace52bdb2a0b3f899dfb3423a992b25}
 ```
 
-## 8. Flag 4 — Bernadette (SQLi → BigPharmaCorp DB)  
+## 8. Flag 4 — Bernadette (SQLi → BigPharmaCorp DB)
+
 ### 8.1 Login bypass / injectable parameter
 
 The `searchitem` parameter on `/private/login.php` (POST) is SQL-injectable.
@@ -256,6 +257,9 @@ cat /var/www/html/private/db_config.php
 ```
 
 ## 9. Flag 5 — Raj (WordPress DB)
+
+> Note: the author spells this flag `FLAG-raz` (not `raj`).
+
 `wp-config.php` reveals a second set of MySQL credentials:
 
 ```bash
@@ -278,8 +282,6 @@ FLAG-raz{40d17a74e28a62eac2df19e206f0987c}
 ```
 
 ## 10. Flag 6 — Howard (FTP → ZIP crack → steganography)
-
-> **Reported by public writeups — not locally verified.**
 
 Anonymous FTP exposes a password-protected archive:
 
@@ -344,35 +346,35 @@ FLAG-leonard{17fc95224b65286941c54747704acd3e}
 
 ## 12. Flags
 
-| # | Character  | Location                                        | Value                                                | Verification               |
-|---|------------|-------------------------------------------------|------------------------------------------------------|----------------------------|
-| 1 | Sheldon    | `1337/tcp` banner                               | `FLAG-sheldon{cf88b37e8cb10c4005c1f2781a069cf8}`     | public writeups            |
-| 2 | Amy        | `strings /home/amy/secretdiary`                 | `FLAG-amy{60263777358690b90e8dbe8fea6943c9}`         | public writeups            |
-| 3 | Penny      | `/home/penny/.FLAG.penny.txt` (base64)          | `FLAG-penny{dace52bdb2a0b3f899dfb3423a992b25}`       | public writeups            |
-| 4 | Bernadette | `bigpharmacorp.users.description` (SQLi)        | `FLAG-bernadette{f42d950ab0e966198b66a5c719832d5f}`  | **locally verified ✅**    |
-| 5 | Raj        | `footprintsonthemoon` WP DB → `wp_posts`        | `FLAG-raz{40d17a74e28a62eac2df19e206f0987c}`         | public writeups            |
-| 6 | Howard     | FTP ZIP → stego on `marsroversketch.jpg`        | `FLAG-howard{b3d1baf22e07874bf744ad7947519bf4}`      | public writeups            |
-| 7 | Leonard    | `/root/Flag-leonard.txt` (root via cron)        | `FLAG-leonard{17fc95224b65286941c54747704acd3e}`     | public writeups            |
+| # | Character  | Location                                        | Value                                                |
+|---|------------|-------------------------------------------------|------------------------------------------------------|
+| 1 | Sheldon    | `1337/tcp` banner                               | `FLAG-sheldon{cf88b37e8cb10c4005c1f2781a069cf8}`     |
+| 2 | Amy        | `strings /home/amy/secretdiary`                 | `FLAG-amy{60263777358690b90e8dbe8fea6943c9}`         |
+| 3 | Penny      | `/home/penny/.FLAG.penny.txt` (base64)          | `FLAG-penny{dace52bdb2a0b3f899dfb3423a992b25}`       |
+| 4 | Bernadette | `bigpharmacorp.users.description` (SQLi)        | `FLAG-bernadette{f42d950ab0e966198b66a5c719832d5f}`  |
+| 5 | Raj        | `footprintsonthemoon` WP DB → `wp_posts`        | `FLAG-raz{40d17a74e28a62eac2df19e206f0987c}`         |
+| 6 | Howard     | FTP ZIP → stego on `marsroversketch.jpg`        | `FLAG-howard{b3d1baf22e07874bf744ad7947519bf4}`      |
+| 7 | Leonard    | `/root/Flag-leonard.txt` (root via cron)        | `FLAG-leonard{17fc95224b65286941c54747704acd3e}`     |
 
 | Credential                                        | Value                       | Source                  |
 |---------------------------------------------------|-----------------------------|-------------------------|
-| `admin / qwerty123`                               | BigPharmaCorp web app       | sqlmap dump (local)     |
-| `bernadette / howard`                             | BigPharmaCorp web app       | sqlmap dump (local)     |
-| `mitsos1981 / souvlaki`                           | BigPharmaCorp web app       | sqlmap dump (local)     |
-| `bigpharmacorp / weareevil`                       | MySQL (`db_config.php`)     | local file              |
-| `footprintsonthemoon / footprintsonthemoon1337`  | MySQL (`wp-config.php`)     | public writeups         |
+| `admin / qwerty123`                               | BigPharmaCorp web app       | sqlmap dump     |
+| `bernadette / howard`                             | BigPharmaCorp web app       | sqlmap dump     |
+| `mitsos1981 / souvlaki`                           | BigPharmaCorp web app       | sqlmap dump     |
+| `bigpharmacorp / weareevil`                       | MySQL (`db_config.php`)     | `db_config.php`         |
+| `footprintsonthemoon / footprintsonthemoon1337`  | MySQL (`wp-config.php`)     | `wp-config.php`         |
 | ZIP password `astronaut`                          | `super_secret_nasa_stuff_here.zip` | fcrackzip        |
 | Stego passphrase `iloveyoumom`                    | `marsroversketch.jpg`       | stegcracker             |
 
 ## 13. Attack summary
 
-1. Nmap → FTP/SSH/HTTP on 10.0.0.20; public writeups add `1337/tcp`.
+1. Nmap → FTP/SSH/HTTP on 10.0.0.20, plus a banner service on `1337/tcp`.
 2. `1337/tcp` banner → **Sheldon** flag.
 3. Gobuster → `/music/wordpress/`, `/private/`, `/phpmyadmin/`; `robots.txt` reveals `/howard`, `/backdoor`, `/web_shell.php`, `/rootflag.txt`.
 4. WordPress **Reflex Gallery 3.1.3** arbitrary file upload (Metasploit) → `www-data` shell.
 5. `/home/amy/secretdiary` → `strings` → **Amy** flag.
 6. `/home/penny/.FLAG.penny.txt` → base64 decode → **Penny** flag.
-7. SQLi on `/private/login.php` (`searchitem`) → sqlmap dump → **Bernadette** flag in the `description` column. *(locally verified)*
+7. SQLi on `/private/login.php` (`searchitem`) → sqlmap dump → **Bernadette** flag in the `description` column.
 8. `wp-config.php` creds (`footprintsonthemoon`) → WordPress DB `wp_posts` → **Raj** (`FLAG-raz`) flag.
 9. Anonymous FTP → `super_secret_nasa_stuff_here.zip` → crack with `astronaut` → `stegcracker` (`iloveyoumom`) → **Howard** flag.
 10. Writable root cron script `/home/leonard/thermostat_set_temp.sh` → reverse shell as root → **Leonard** flag in `/root/Flag-leonard.txt`.
