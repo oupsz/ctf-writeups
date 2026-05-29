@@ -15,26 +15,6 @@
 | Goal             | Capture the 4 flags and get root       |
 | Theme            | South Park — Derp / Stinky             |
 
-Flags obtained (present in the local file):
-
-```
-flag1(52E37291AEDF6A46D7D0BB8A6312F4F9F1AA4975C248C3F0E008CBA09D6E9166)
-flag2(a7d355b26bda6bf1196ccffead0b2cf2b81f0a9de5b4876b44407f1dc07e51e6)
-flag3(07f62b021771d3cf67e2e1faf18769cc5e5c119ad7d4d1847a11e11d6d5a7ecb)
-flag4(49dca65f362fee401292ed7ada96f96295eab1e589c52e4e66bf4aedda715fdd)
-```
-
-And the final line:
-
-```
-root@DeRPnStiNK:/root/Desktop# cat flag.txt
-flag4(49dca65f362fee401292ed7ada96f96295eab1e589c52e4e66bf4aedda715fdd)
-
-Congrats on rooting my first VulnOS!
-Hit me up on twitter and let me know your thoughts!
-@securekomodo
-```
-
 Figure 1 — DeRPnStiNK landing page served by Apache (South Park theme).
 
 ![DeRPnStiNK landing page](assets/DerpNStink_1/image-02.png)
