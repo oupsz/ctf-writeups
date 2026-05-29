@@ -176,9 +176,6 @@ thanos@nemesis:~$
 ```
 Flag{LF1_is_R34L}
 ```
-
-![`cat flag1.txt` — Flag{LF1_is_R34L} ASCII banner](assets/IA_Nemesis/image-01.png)
-
 (preserved in the local notes — delivered when exploiting the initial LFI).
 
 ### 5.2 Pivot thanos → carlos via Python zipfile hijack
