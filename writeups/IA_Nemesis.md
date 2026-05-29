@@ -235,8 +235,6 @@ Flag{PYTHON_is_FUN}
 
 ![Flag2 — "Congratulations for pwning user Carlos" — Flag{PYTHON_is_FUN}](assets/IA_Nemesis/image-04.png)
 
-![Bonus terminal — `cat encrypt.py` and additional flag banner](assets/IA_Nemesis/image-13.png)
-
 ## 6. Privilege escalation
 
 ### 6.1 UID reset (to become "real" carlos)
@@ -299,6 +297,7 @@ Matching Defaults entries for carlos on nemesis:
 The `sudo -l` in the local log was truncated, but `carlos` has sudo on an interpreter binary (Python/Perl/Bash with `NOPASSWD`) → `sudo <bin> -c "import os; os.system('/bin/bash')"` → root.
 
 ![Editor screen showing the command-to-execute payload used during privesc](assets/IA_Nemesis/image-02.png)
+![Bonus terminal — `cat encrypt.py` and additional flag banner](assets/IA_Nemesis/image-13.png)
 
 After spawning the root shell, `/root/root.txt` reveals the final flag:
 
