@@ -13,7 +13,6 @@ The writeups are written in English and focus on practical methodology, enumerat
 | Dr4g0n b4ll | [Dr4g0n_b4ll.md](writeups/Dr4g0n_b4ll.md) |
 | Healthcare 1 | [Healthcare_1.md](writeups/Healthcare_1.md) |
 | IA Nemesis | [IA_Nemesis.md](writeups/IA_Nemesis.md) |
-| Operation GhostPrint | [Operation_GhostPrint.md](writeups/Operation_GhostPrint.md) |
 | School 1 | [School_1.md](writeups/School_1.md) |
 | TBBT Fun with Flags | [TBBT_Fun_with_Flags.md](writeups/TBBT_Fun_with_Flags.md) |
 | Tomato 1 | [Tomato_1.md](writeups/Tomato_1.md) |
