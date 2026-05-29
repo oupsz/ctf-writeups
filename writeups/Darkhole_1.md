@@ -272,11 +272,4 @@ DarkHole{<final flag>}
 - A 777 user directory breaks sshd's `StrictModes` (no `authorized_keys` injection possible) but still allows overwriting privileged scripts.
 - Documenting failed attempts (kernel exploits, SSH keys) saves time in future iterations.
 
-## 10. References consulted
 
-- Darkhole 1 — VulnHub (official entry)
-- Darkhole1 VulnHub CTF — Basit Olasubomi Balogun, Medium
-- DarkHole Vulnhub Walkthrough — InfoSec Articles
-- DARKHOLE: 1 VulnHub CTF Walkthrough — Infosec Resources
-- DarkHole Walkthrough — NepCodeX
-- Darkhole 1 — D4nt3
