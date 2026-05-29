@@ -18,6 +18,8 @@
 
 Before any scan, I opened the IP in the browser to confirm it was alive and to get thematic context.
 
+![DRAGON BALL homepage — Goku artwork, "hi this Aj's i'm creating this ctf"](assets/Dr4g0n_b4ll/image-07.png)
+
 The page confirms three useful things: the server is responding on HTTP, the author identifies as Aj, and the theme is Dragon Ball — that word will resurface later as a hint, so I noted it down right away.
 
 ### 2.2 Nmap
