@@ -225,12 +225,4 @@ The "Fun with Flags" CTF doesn't focus on classic Linux escalation — the chall
 - Password reuse across DB, FTP, SSH, and WiFi.
 - Flags embedded in DB columns (the `description` field) is a typical vector in themed CTFs.
 
-## 10. References consulted
 
-- TBBT: Fun with Flags ~ VulnHub (official entry)
-- TBBT: 2 – FunWithFlags ~ VulnHub
-- TBBT 1: Walkthrough — Sudeepto Roy, Medium
-- TBBT: Fun with flags Walkthrough — A-s4t0sh, Medium
-- TBBT: Fun with Flags — InfoSec Adventures
-- TBBT FunWithFlags — emaragkos Blog
-- TBBT: FUNWITHFLAGS — Infosec Institute
