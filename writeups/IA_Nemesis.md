@@ -233,8 +233,6 @@ Flag{PYTHON_is_FUN}
 
 ![Flag2 — "Congratulations for pwning user Carlos" — Flag{PYTHON_is_FUN}](assets/IA_Nemesis/image-04.png)
 
-![Bonus terminal — `cat encrypt.py` and additional flag banner](assets/IA_Nemesis/image-13.png)
-
 ## 6. Privilege escalation
 
 ### 6.1 UID reset (to become "real" carlos)
@@ -299,6 +297,7 @@ The `sudo -l` in the local log was truncated, but public writeups of the same CT
 > This final step (exact sudo command) was inferred from the local files and external writeups.
 
 ![Editor screen showing the command-to-execute payload used during privesc](assets/IA_Nemesis/image-02.png)
+![Bonus terminal — `cat encrypt.py` and additional flag banner](assets/IA_Nemesis/image-13.png)
 
 ## 7. Flags
 
