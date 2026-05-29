@@ -260,17 +260,4 @@ Sun_CSR_TEAM_TOMATO_JS_0232xx23
 - Kernel `4.4.0-21-generic` (Ubuntu 16.04) is a minefield: `af_packet`, eBPF, DirtyCow, etc.
 - Linpeas exploit ranking helps pick the most likely to succeed instead of trying everything.
 
-## 10. References consulted
 
-- Tomato: 1 ~ VulnHub (official entry)
-- Tomato: 1 Vulnhub Walkthrough — Hacking Articles
-- Tomato Vulnhub Walkthrough — HackNos
-- Tomato Vulnhub Walkthrough: from LFI to RCE — Viblo
-- Tomato 1: VulnHub CTF walkthrough — Infosec Institute
-- Tomato 1 — VulnHub Easy Linux — ju4ncaa
-- Tomato 1: CTF Write-Up — assume-breach, Medium
-- CVE-2016-8655 — chocobo_root (af_packet race), exploit-db 40871
-
-## Appendix — Local screenshot gallery
-
-The screenshots captured during the session (browser, terminals, panels) accompany this writeup as evidence. Local captures distributed across the attack phases (recon, LFI, shell, privesc), in natural order by the original file's timestamp/size.
