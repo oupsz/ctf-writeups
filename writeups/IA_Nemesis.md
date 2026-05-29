@@ -339,17 +339,3 @@ Additionally, carlos's password discovered: `ENCRYPTIONISFUNPASSWORD`.
 - Apache/nginx difference on the same box: each serves a different version of the site; the LFI vector was only on the nginx port (which executes PHP).
 - Documenting failed attempts (8 vectors) saves hours in future iterations.
 
-## 10. References consulted
-
-- IA: Nemesis (1.0.1) ~ VulnHub (official entry)
-- IA: Nemesis (1.0.1) — Alperen Ugurlu, Medium
-- IA : Nemesis Vulnhub Walkthrough — InfoSec Articles
-- Nemesis v1.0.1 — janumejia (HackPage)
-- IA: Nemesis Vulnhub Writeup — N0t0d4y, Medium
-- IA: Nemesis (1.0.1) ~ VulnHub Walkthrough — YouTube
-
-## Appendix — Local screenshot gallery
-
-Local captures distributed across the attack phases (Apache/nginx recon, BurpSuite, SSH session as thanos, carlos session, etc.).
-
-Attached figures — 17 local captures, ordered by file size (a reasonable proxy for chronological order: denser captures tend to appear later in the sessions).
