@@ -1,4 +1,4 @@
-# Tomato: 1 — VulnHub
+# Tomato — VulnHub
 
 ## 1. Identification
 
