@@ -1,4 +1,4 @@
-# Game of Thrones CTF: 1
+# Game of Thrones CTF: 
 
 *CTF Write-up*
 
