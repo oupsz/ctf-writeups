@@ -1,7 +1,5 @@
 # DerpNStink 1 — VulnHub
 
-> **Note on sources:** the local ODT document only contains the 4 flags + 3 screenshots and a few commands. The technical sequence is reconstructed from those local artifacts and, to fill small gaps (phase order, privesc vector), from public writeups of the same CTF — duly referenced at the end.
-
 ## 1. Identification
 
 | Field            | Value                                  |
