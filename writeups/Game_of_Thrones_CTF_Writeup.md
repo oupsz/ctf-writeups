@@ -122,7 +122,11 @@ I repeated the request with the Three-eyed-raven user-agent and received the hid
 After that I deduced that the " http://10.0.0.36/h/i/d/d -> /h/i/d/d/" shown on FeroxBuster was clearly "/h/i/d/d/e/n", so I typed this on browser and abracadabra! I was right:
 ![Figure 9 - Direct-access page clue.](assets/game_of_thrones/figure_09.png)
 
-I opened the direct-access-to-kings-landing route and saw that it was a false or blocked direct route. The page reinforced that I could not simply jump to the final kingdom from the front door and would need to complete the intermediate chain.
+So in the hidden page's source-code there's information about the direct-access-to-kings-landing route for what I can remember, unfortunately in the process of registering I forgot to copy and paste the source code on a file.
+
+But I almost certain, that was got by this way... 
+
+Anyway, I opened the direct-access-to-kings-landing route and saw that it was a false or blocked direct route. The page reinforced that I could not simply jump to the final kingdom from the front door and would need to complete the intermediate chain.
 
 ![Figure 10 - Protected hidden directory prompt.](assets/game_of_thrones/figure_10.png)
 
