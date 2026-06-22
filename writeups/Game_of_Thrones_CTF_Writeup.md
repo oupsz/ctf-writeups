@@ -122,7 +122,7 @@ I repeated the request with the Three-eyed-raven user-agent and received the hid
 After that I deduced that the " http://10.0.0.36/h/i/d/d -> /h/i/d/d/" shown on FeroxBuster was clearly "/h/i/d/d/e/n", so I typed this on browser and abracadabra! I was right:
 ![Figure 9 - Direct-access page clue.](assets/game_of_thrones/figure_09.png)
 
-So in the hidden page's source-code there's information about the direct-access-to-kings-landing route for what I can remember, unfortunately in the process of registering I forgot to copy and paste the source code of this specific on a file.
+So in the hidden page's source-code there's information about the direct-access-to-kings-landing route for what I can remember, unfortunately in the process of registering for this writeup I forgot to copy and paste the source code of this specific on a file.
 
 But I almost certain, that the direct-access-to-king-landing was got by this way... 
 
