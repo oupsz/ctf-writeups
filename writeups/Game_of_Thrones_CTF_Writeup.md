@@ -119,6 +119,7 @@ I checked the robots and hidden-route information and saw the special Three-eyed
 
 I repeated the request with the Three-eyed-raven user-agent and received the hidden HTML response. The page provided multiple story hints, including the need to identify as oberynmartell and the warning about Docker-based separation between kingdoms.
 
+After that I deduced that the " http://10.0.0.36/h/i/d/d -> /h/i/d/d/" shown on FeroxBuster was clearly "/h/i/d/d/e/n", so I typed this on browser and abracadabra! I was right:
 ![Figure 9 - Direct-access page clue.](assets/game_of_thrones/figure_09.png)
 
 I opened the direct-access-to-kings-landing route and saw that it was a false or blocked direct route. The page reinforced that I could not simply jump to the final kingdom from the front door and would need to complete the intermediate chain.
