@@ -1,5 +1,7 @@
 # IA: Nemesis (1.0.1) — VulnHub
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## 1. Identification
 
 | Field            | Value                                                  |
@@ -174,7 +176,7 @@ thanos@nemesis:~$
 ### 5.1 Flag1 — LFI confirmation
 
 ```
-Flag{LF1_is_R34L}
+Flag{LF1_...[REDACTED]...34L}
 ```
 (preserved in the local notes — delivered when exploiting the initial LFI).
 
@@ -227,10 +229,10 @@ drwxr-xr-x 4 root   root   4096 Oct 6 2020 ..
 drwxr-xr-x 3 carlos carlos 4096 Oct 7 2020 .local
 -rw-r--r-- 1 carlos carlos 279 Oct 7 2020 root.txt
 cbash-5.0$ cat /home/carlos/flag*.txt 2>/dev/null
-Flag{PYTHON_is_FUN}
+Flag{PYTH...[REDACTED]...FUN}
 ```
 
-![Flag2 — "Congratulations for pwning user Carlos" — Flag{PYTHON_is_FUN}](assets/IA_Nemesis/image-04.png)
+![Flag2 — "Congratulations for pwning user Carlos" — Flag{PYTH...[REDACTED]...FUN}](assets/IA_Nemesis/image-04.png)
 
 ## 6. Privilege escalation
 
@@ -300,7 +302,7 @@ After spawning the root shell, `/root/root.txt` reveals the final flag:
 
 ```bash
 root@nemesis:~# cat /root/root.txt
-FLAG{CTFs_ARE_AW3S0M3}
+FLAG{CTFs...[REDACTED]...S0M3}
 Congratulations for getting root on Nemesis! We hope you enjoyed this CTF!
 Share this Flag on Twitter (@infosecarticles). Cheers!
 Follow our blog at https://www.infosecarticles.com
@@ -310,9 +312,9 @@ Follow our blog at https://www.infosecarticles.com
 
 | Flag     | Location                   | Value                       |
 |----------|----------------------------|-----------------------------|
-| flag1    | LFI confirmed              | `Flag{LF1_is_R34L}`         |
-| flag2    | `/home/carlos/flag2.txt`   | `Flag{PYTHON_is_FUN}`       |
-| root.txt | `/root/root.txt`           | `FLAG{CTFs_ARE_AW3S0M3}`    |
+| flag1    | LFI confirmed              | `Flag{LF1_...[REDACTED]...34L}`         |
+| flag2    | `/home/carlos/flag2.txt`   | `Flag{PYTH...[REDACTED]...FUN}`       |
+| root.txt | `/root/root.txt`           | `FLAG{CTFs...[REDACTED]...S0M3}`    |
 
 Additionally, carlos's password recovered: `ENCRYPTIONISFUNPASSWORD`.
 
@@ -325,15 +327,15 @@ Additionally, carlos's password recovered: `ENCRYPTIONISFUNPASSWORD`.
 5. `message=/etc/passwd` → enumerate users `carlos` / `thanos`.
 6. `message=/home/thanos/.ssh/id_rsa` → OpenSSH key.
 7. SSH `thanos@10.0.0.32:52846` with the key.
-8. Flag1 unlocked: `Flag{LF1_is_R34L}`.
+8. Flag1 unlocked: `Flag{LF1_...[REDACTED]...34L}`.
 9. Identify carlos's cron calling `backup.py` in `/home/thanos/`.
 10. Python `zipfile` hijack → `cp /bin/bash /tmp/cbash; chmod 4755 /tmp/cbash`.
 11. `/tmp/cbash -p` → euid=carlos.
-12. Flag2 read: `Flag{PYTHON_is_FUN}`.
+12. Flag2 read: `Flag{PYTH...[REDACTED]...FUN}`.
 13. `setreuid` to become "real" carlos; read `encrypt.py`.
 14. Brute-force the affine cipher with key `[11, 13]` → password `ENCRYPTIONISFUNPASSWORD`.
 15. `sudo -l` + interpreter escalation → root.
-16. Read `/root/root.txt` → `FLAG{CTFs_ARE_AW3S0M3}`.
+16. Read `/root/root.txt` → `FLAG{CTFs...[REDACTED]...S0M3}`.
 
 ## 9. Technical lessons
 

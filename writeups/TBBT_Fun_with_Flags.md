@@ -1,5 +1,7 @@
 # TBBT: Fun with Flags — VulnHub
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## 1. Identification
 
 | Field            | Value                                                                  |
@@ -117,7 +119,7 @@ nc 10.0.0.20 1337
 ```
 
 ```
-FLAG-sheldon{cf88b37e8cb10c4005c1f2781a069cf8}
+FLAG-sheldon{cf88...[REDACTED]...9cf8}
 ```
 
 ## 5. Foothold — WordPress `reflex-gallery` arbitrary file upload
@@ -149,7 +151,7 @@ strings /home/amy/secretdiary
 ```
 
 ```
-FLAG-amy{60263777358690b90e8dbe8fea6943c9}
+FLAG-amy{6026...[REDACTED]...43c9}
 ```
 
 ## 7. Flag 3 — Penny (base64 in a hidden file)
@@ -158,13 +160,13 @@ FLAG-amy{60263777358690b90e8dbe8fea6943c9}
 
 ```bash
 cat /home/penny/.FLAG.penny.txt
-# RkxBRy1wZW5ueXtkYWNlNTJiZGIyYTBiM2Y4OTlkZmIzNDIzYTk5MmIyNX0=
+# RkxB...[REDACTED]...NX0=
 
-echo 'RkxBRy1wZW5ueXtkYWNlNTJiZGIyYTBiM2Y4OTlkZmIzNDIzYTk5MmIyNX0=' | base64 -d
+echo 'RkxB...[REDACTED]...NX0=' | base64 -d
 ```
 
 ```
-FLAG-penny{dace52bdb2a0b3f899dfb3423a992b25}
+FLAG-penny{dace...[REDACTED]...2b25}
 ```
 
 ## 8. Flag 4 — Bernadette (SQLi → BigPharmaCorp DB)
@@ -243,7 +245,7 @@ cracked: 'souvlaki'  → user 'mitsos1981'
 The `description` row for user `bernadette` contains the flag:
 
 ```
-FLAG-bernadette{f42d950ab0e966198b66a5c719832d5f}
+FLAG-bernadette{f42d...[REDACTED]...2d5f}
 ```
 
 ### 8.4 DB credentials on disk
@@ -278,7 +280,7 @@ mysql -u footprintsonthemoon -p
 The flag is stored inside a WordPress post:
 
 ```
-FLAG-raz{40d17a74e28a62eac2df19e206f0987c}
+FLAG-raz{40d1...[REDACTED]...987c}
 ```
 
 ## 10. Flag 6 — Howard (FTP → ZIP crack → steganography)
@@ -308,7 +310,7 @@ cat marsroversketch.jpg.out
 ```
 
 ```
-FLAG-howard{b3d1baf22e07874bf744ad7947519bf4}
+FLAG-howard{b3d1...[REDACTED]...9bf4}
 ```
 
 > Note: the `astronaut` value also appears in the locally preserved sqlmap notes (`PASSWORD FOUND!!!!: pw == astronaut`), consistent with this ZIP-cracking step.
@@ -341,20 +343,20 @@ cat /root/Flag-leonard.txt
 ```
 
 ```
-FLAG-leonard{17fc95224b65286941c54747704acd3e}
+FLAG-leonard{17fc...[REDACTED]...cd3e}
 ```
 
 ## 12. Flags
 
 | # | Character  | Location                                        | Value                                                |
 |---|------------|-------------------------------------------------|------------------------------------------------------|
-| 1 | Sheldon    | `1337/tcp` banner                               | `FLAG-sheldon{cf88b37e8cb10c4005c1f2781a069cf8}`     |
-| 2 | Amy        | `strings /home/amy/secretdiary`                 | `FLAG-amy{60263777358690b90e8dbe8fea6943c9}`         |
-| 3 | Penny      | `/home/penny/.FLAG.penny.txt` (base64)          | `FLAG-penny{dace52bdb2a0b3f899dfb3423a992b25}`       |
-| 4 | Bernadette | `bigpharmacorp.users.description` (SQLi)        | `FLAG-bernadette{f42d950ab0e966198b66a5c719832d5f}`  |
-| 5 | Raj        | `footprintsonthemoon` WP DB → `wp_posts`        | `FLAG-raz{40d17a74e28a62eac2df19e206f0987c}`         |
-| 6 | Howard     | FTP ZIP → stego on `marsroversketch.jpg`        | `FLAG-howard{b3d1baf22e07874bf744ad7947519bf4}`      |
-| 7 | Leonard    | `/root/Flag-leonard.txt` (root via cron)        | `FLAG-leonard{17fc95224b65286941c54747704acd3e}`     |
+| 1 | Sheldon    | `1337/tcp` banner                               | `FLAG-sheldon{cf88...[REDACTED]...9cf8}`     |
+| 2 | Amy        | `strings /home/amy/secretdiary`                 | `FLAG-amy{6026...[REDACTED]...43c9}`         |
+| 3 | Penny      | `/home/penny/.FLAG.penny.txt` (base64)          | `FLAG-penny{dace...[REDACTED]...2b25}`       |
+| 4 | Bernadette | `bigpharmacorp.users.description` (SQLi)        | `FLAG-bernadette{f42d...[REDACTED]...2d5f}`  |
+| 5 | Raj        | `footprintsonthemoon` WP DB → `wp_posts`        | `FLAG-raz{40d1...[REDACTED]...987c}`         |
+| 6 | Howard     | FTP ZIP → stego on `marsroversketch.jpg`        | `FLAG-howard{b3d1...[REDACTED]...9bf4}`      |
+| 7 | Leonard    | `/root/Flag-leonard.txt` (root via cron)        | `FLAG-leonard{17fc...[REDACTED]...cd3e}`     |
 
 | Credential                                        | Value                       | Source                  |
 |---------------------------------------------------|-----------------------------|-------------------------|

@@ -1,5 +1,7 @@
 # Dr4g0n b4ll: 1 — VulnHub
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## 1. Identification
 
 | Field                | Value                                                                |
@@ -213,12 +215,12 @@ drwxr-xr-x 2 root root 4096 Jan     4 2021 script
 drwx------ 2 xmen xmen 4096 Jan     4 2021 .ssh
 
 xmen@Dr4gonB4ll:~$ cat local.txt
-your falg :192fb6275698b5ad9868c7afb62fd555
+your falg :192f...[REDACTED]...d555
 ```
 
 Two important details:
 
-- `local.txt` already gives me the user flag — `192fb6275698b5ad9868c7afb62fd555`.
+- `local.txt` already gives me the user flag — `192f...[REDACTED]...d555`.
 - The `script/` folder inside `xmen`'s home is owned by root (`drwxr-xr-x 2 root root`). That kind of permission asymmetry inside a user's home is usually exactly the CTF's privesc vector — worth a look.
 
 ### 5.2 Hunt for SUID binaries
@@ -294,7 +296,7 @@ root@Dr4gonB4ll:~# cat proof.txt
 
 join channel:    https://t.me/joinchat/St01KnXzcGeWMKSC
 
-your flag: 031f7d2d89b9dd2da3396a0d7b7fb3e2
+your flag: 031f...[REDACTED]...b3e2
 ```
 
 ![Root flag ASCII banner](assets/Dr4g0n_b4ll/image-06.png)
@@ -305,8 +307,8 @@ Root flag captured.
 
 | Type | Path                  | Value                              |
 |------|-----------------------|------------------------------------|
-| User | `/home/xmen/local.txt` | `192fb6275698b5ad9868c7afb62fd555` |
-| Root | `/root/proof.txt`      | `031f7d2d89b9dd2da3396a0d7b7fb3e2` |
+| User | `/home/xmen/local.txt` | `192f...[REDACTED]...d555` |
+| Root | `/root/proof.txt`      | `031f...[REDACTED]...b3e2` |
 
 Both present in the local screenshots.
 

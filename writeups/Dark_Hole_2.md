@@ -1,5 +1,7 @@
 # Dark Hole 2 — CTF Writeup
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## 1. Identification
 
 | Field             | Value                                                                 |
@@ -12,7 +14,7 @@
 | Initial web creds | `lush@admin.com:321`                                                  |
 | SSH creds         | `jehad:fool`                                                          |
 | Later user creds  | `losy:gang`                                                           |
-| Root flag         | `DarkHole{'Legend'}`                                                  |
+| Root flag         | `DarkHole{'Le...[REDACTED]...d'}`                                                  |
 
 Full chain in one line: web access → login/source inspection → exposed `.git` → commit history leak → `lush@admin.com:321` → dashboard access → SQL injection in `id` → dump `darkhole_2.ssh` → SSH as `jehad` → find local service on `127.0.0.1:9999` executing commands as `losy` → SSH key injection / `losy:gang` → sudo Python command → root.
 
@@ -853,5 +855,5 @@ Figure 19 — Root flag.
 ![Root flag](assets/Dark_Hole_2/image-19.png)
 
 ```text
-DarkHole{'Legend'}
+DarkHole{'Le...[REDACTED]...d'}
 ```

@@ -1,5 +1,7 @@
 # Healthcare: 1 — VulnHub
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## 1. Identification
 
 | Field            | Value                                              |
@@ -170,7 +172,7 @@ Reverse shell → `bash-4.1$` as `www-data`.
 
 ```bash
 bash-4.1$ cat user.txt
-d41d8cd98f00b204e9800998ecf8427e
+d41d...[REDACTED]...427e
 ```
 
 > Note: the content shown in `user.txt` is exactly the MD5 of an empty file, suggesting a placeholder flag. The file may actually live elsewhere — check `/home/` / `/root/`.
@@ -283,7 +285,7 @@ rootbash-4.1# cat root.txt
 
 | Flag     | Location                                     | Content in local files                                                |
 |----------|----------------------------------------------|-----------------------------------------------------------------------|
-| user.txt | `/var/www/html/openemr/...` (or home)        | `d41d8cd98f00b204e9800998ecf8427e` (MD5 of empty file — likely placeholder) |
+| user.txt | `/var/www/html/openemr/...` (or home)        | `d41d...[REDACTED]...427e` (MD5 of empty file — likely placeholder) |
 | root.txt | `/root/root.txt`                             | Read after escalation — final content only visible in the original session |
 
 Bonus found in `/root/`: `healthcheck.c` (source code) and `sudo.rpm` (package present as a CTF design hint).

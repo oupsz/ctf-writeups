@@ -1,5 +1,7 @@
 # Darkhole 1 — VulnHub
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## 1. Identification
 
 | Field            | Value                                            |
@@ -236,7 +238,7 @@ Attempts that failed (documented):
 
 ```bash
 john@darkhole:~$ cat /home/john/user.txt
-DarkHole{You_Can_DO_It}
+DarkHole{You_...[REDACTED]..._It}
 
 root@darkhole:/home/john# whoami
 root
@@ -245,13 +247,13 @@ root@darkhole:/home/john# id
 uid=0(root) gid=0(root) groups=0(root)
 
 root@darkhole:/home/john# cat /root/root.txt
-DarkHole{You_Are_Legend}
+DarkHole{You_...[REDACTED]...end}
 ```
 
 | Flag     | Path                  | Value                       |
 |----------|-----------------------|-----------------------------|
-| user.txt | `/home/john/user.txt` | `DarkHole{You_Can_DO_It}`   |
-| root.txt | `/root/root.txt`      | `DarkHole{You_Are_Legend}`  |
+| user.txt | `/home/john/user.txt` | `DarkHole{You_...[REDACTED]..._It}`   |
+| root.txt | `/root/root.txt`      | `DarkHole{You_...[REDACTED]...end}`  |
 
 ## 8. Attack summary
 

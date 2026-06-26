@@ -1,5 +1,7 @@
 # Tomato — VulnHub
 
+> Note: Flags were partially redacted to preserve scoreboard integrity.
+
 ## 1. Identification
 
 | Field            | Value                                                |
@@ -231,12 +233,12 @@ root@ubuntu:/tmp# cd /root
 root@ubuntu:/root# ls
 proof.txt
 root@ubuntu:/root# cat proof.txt
-Sun_CSR_TEAM_TOMATO_JS_0232xx23
+Sun_...[REDACTED]...xx23
 ```
 
 | Flag             | Path              | Content                          |
 |------------------|-------------------|----------------------------------|
-| proof.txt (root) | `/root/proof.txt` | `Sun_CSR_TEAM_TOMATO_JS_0232xx23` |
+| proof.txt (root) | `/root/proof.txt` | `Sun_...[REDACTED]...xx23` |
 
 ## 8. Attack summary
 
